@@ -13,7 +13,19 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('job_title');
+            $table->date('hire_date');
+            $table->string('phone', 15);
+            $table->string('emergency_phone', 15)->nullable();
+            $table->enum('gender', ['male', 'female'])->nullable();
+            $table->date('date_of_birth')->nullable();
+            $table->string('national_id')->nullable()->unique();
+            $table->enum('status', ['active','inactive','terminated'])->default('active');
             $table->timestamps();
+
+            $table->index(['first_name', 'last_name', 'job_title']);
         });
     }
 
