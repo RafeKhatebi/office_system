@@ -22,7 +22,7 @@ return new class extends Migration
             $table->enum('gender', ['male', 'female'])->nullable();
             $table->date('date_of_birth')->nullable();
             $table->string('national_id')->nullable()->unique();
-            $table->enum('status', ['active','inactive','terminated'])->default('active');
+            $table->enum('status', ['active','inactive'])->default('active');
             $table->timestamps();
 
             $table->index(['first_name', 'last_name', 'job_title']);

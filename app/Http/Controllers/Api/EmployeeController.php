@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class EmployeeController extends Controller
@@ -36,7 +37,32 @@ class EmployeeController extends Controller
             'gender'          => 'nullable|in:male,female',
             'date_of_birth'   => 'nullable|date|before_or_equal:today',
             'national_id'     => 'nullable|string|max:255|unique:employees,national_id',
-            'status'          => 'nullable|in:active,inactive,terminated',
+            'status'          => 'nullable|in:active,inactive',
+        ]);
+
+        // check validation
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Validation error',
+                'errors'  => $validator->errors(),
+            ]);
+        }
+        // save employee's information
+        $employee = employee::create([
+            'first_name'    => $request->first_name,
+            'last_name'     => $request->last_name,
+            'job_title'     => $request->job_title,
+            'hire_date'     => Carbon::today(),
+            'phone'         => $request->phone,
+            'emergency_phone' => $request->emergency_phone,
+            'gender'          => $request->gender,
+            'date_of_birth'   => $request->date_of_birth,
+            'national_id'     => $request->national_id,
+            'status'          => $request->status,
+        ]);
+        return response()->json([
+            'message'  => 'Date saved successfully',
+            'data'     => $employee
         ]);
     }
 
