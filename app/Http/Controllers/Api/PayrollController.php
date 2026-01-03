@@ -18,7 +18,7 @@ class PayrollController extends Controller
      */
     public function index()
     {
-        $payrolls = Payroll::paginate(10);
+        $payrolls = Payroll::with('employee')->paginate(10);
         if (isEmpty($payrolls)) {
             return response()->json([
                 'massage'  => 'Table is empty',
@@ -90,7 +90,7 @@ class PayrollController extends Controller
      */
     public function show(string $id)
     {
-        $payroll = Payroll::find($id);
+        $payroll = Payroll::with('employee')->find($id);
         return response()->json([
             'message'  => 'Data fetched successfully',
             'data'     => $payroll
