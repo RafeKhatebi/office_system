@@ -1,7 +1,13 @@
 export default function Welcome() {
     return (
-        <div className="p-6">
-            <h1 className="text-2xl font-bold">Welcome to React in Laravel 2026!</h1>
-        </div>
+        <>
+            <h1 className="text-3xl font-bold">Hello, welcome to your {<span className="text-blue-500 underline">Accounting System</span>}</h1>
+            <p className="text-lg">This is a simple example of a React component.</p>
+            {/* Navbar */}
+            {/* Sidebar */}
+            {/* Main Content */}
+            {/* Footer */} 
+        </>
     );
 }
+
