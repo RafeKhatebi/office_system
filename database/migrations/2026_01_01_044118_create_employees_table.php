@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('job_title');
+            $table->decimal('salary', 10,2)->nullable();
             $table->date('hire_date');
             $table->string('phone', 15);
             $table->string('emergency_phone', 15)->nullable();

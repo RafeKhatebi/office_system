@@ -10,6 +10,7 @@ class employee extends Model
         'first_name',
         'last_name', 
         'job_title',
+        'salary',
         'hire_date',
         'phone',
         'emergency_phone',
@@ -22,6 +23,7 @@ class employee extends Model
     protected $casts = [
         'hire_date' => 'date: Y-m-d',
         'date_of_birth' => 'date: Y-m-d',
+        'salary'        => 'decimal:2',
 
     ];
 }
