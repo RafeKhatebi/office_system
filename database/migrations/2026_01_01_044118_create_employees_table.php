@@ -16,12 +16,16 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('job_title');
+            $table->decimal('salary', 10,2)->nullable();
+            $table->string('employee_code')->unique();
             $table->date('hire_date');
+            $table->text('address')->nullable();
             $table->string('phone', 15);
             $table->string('emergency_phone', 15)->nullable();
             $table->enum('gender', ['male', 'female'])->nullable();
             $table->date('date_of_birth')->nullable();
             $table->string('national_id')->nullable()->unique();
+            $table->enum('employment_type', ['full_time', 'part_time', 'project_base', 'contract'])->default('full_time');
             $table->enum('status', ['active','inactive'])->default('active');
             $table->timestamps();
 
