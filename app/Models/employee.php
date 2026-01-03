@@ -11,12 +11,15 @@ class employee extends Model
         'last_name', 
         'job_title',
         'salary',
+        'employee_code',
         'hire_date',
+        'address',
         'phone',
         'emergency_phone',
         'gender',
         'date_of_birth',
         'national_id',
+        'employment_type',
         'status'
     ];
 
@@ -26,4 +29,17 @@ class employee extends Model
         'salary'        => 'decimal:2',
 
     ];
+
+
+    protected static function booted()
+    {
+        static::creating(function ($employee) {
+            $employee->employee_code = 'EMP-' . now()->format('Y') . '-' . str_pad(
+                (self::max('id') + 1),
+                3,
+                '0',
+                STR_PAD_LEFT
+            );
+        });
+    }
 }
