@@ -42,4 +42,10 @@ class employee extends Model
             );
         });
     }
+
+
+    public function payroll()
+    {
+        return $this->hasMany(Payroll::class);
+    }
 }
