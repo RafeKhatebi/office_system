@@ -23,6 +23,10 @@ class income extends Model
 
     public function source()
     {
+<<<<<<< Updated upstream
         return $this->belongsTo(IncomeResource::class, 'income_resource_id');
+=======
+        return $this->belongsTo()
+>>>>>>> Stashed changes
     }
 }

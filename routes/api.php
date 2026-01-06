@@ -2,11 +2,15 @@
 
 use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\ExpenseController;
+<<<<<<< Updated upstream
 
 use App\Http\Controllers\Api\IncomeResourceController;
 
 use App\Http\Controllers\Api\IncomeController;
 
+=======
+use App\Http\Controllers\Api\IncomeController;
+>>>>>>> Stashed changes
 use App\Http\Controllers\Api\PayrollController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\WithdrawalController;
@@ -25,7 +29,11 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('/payrolls', PayrollController::class);
     Route::apiResource('/expenses', ExpenseController::class);
     Route::apiResource('/withdrawals', WithdrawalController::class);
+<<<<<<< Updated upstream
     Route::apiResource('/income_resources', IncomeResourceController::class);
     Route::apiResource('/incomes', IncomeController::class);
 
+=======
+    Route::apiResource('/incomes', IncomeController::class);
+>>>>>>> Stashed changes
 });
