@@ -15,4 +15,9 @@ class IncomeResource extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    public function income()
+    {
+        return $this->hasMany(income::class);
+    }
 }

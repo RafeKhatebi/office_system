@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\ExpenseController;
+
 use App\Http\Controllers\Api\IncomeResourceController;
+
+use App\Http\Controllers\Api\IncomeController;
+
 use App\Http\Controllers\Api\PayrollController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\WithdrawalController;
@@ -22,4 +26,6 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('/expenses', ExpenseController::class);
     Route::apiResource('/withdrawals', WithdrawalController::class);
     Route::apiResource('/income_resources', IncomeResourceController::class);
+    Route::apiResource('/incomes', IncomeController::class);
+
 });
