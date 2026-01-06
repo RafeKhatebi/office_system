@@ -16,18 +16,8 @@ class IncomeController extends Controller
      */
     public function index()
     {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
         $incomes = income::with('source')->paginate(10);
         if ($incomes->isEmpty()) {
-=======
-        $incomes = income::paginate(10);
-        if (isEmpty($incomes)) {
->>>>>>> Stashed changes
-=======
-        $incomes = income::paginate(10);
-        if (isEmpty($incomes)) {
->>>>>>> Stashed changes
             return response()->json([
                 'message' => 'Table is empty',
                 'data'    => $incomes
@@ -56,15 +46,7 @@ class IncomeController extends Controller
      */
     public function show(string $id)
     {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
         $income = income::with('source')->find($id);
-=======
-        $income = income::find($id);
->>>>>>> Stashed changes
-=======
-        $income = income::find($id);
->>>>>>> Stashed changes
         if (!$income) {
             return response()->json([
                 'message' => 'Not found id: '.$id,
