@@ -21,4 +21,9 @@ class Client extends Model
     protected $casts = [
 
     ];
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class, 'client_id');
+    }
 }

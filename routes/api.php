@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\FinancialReportController;
 use App\Http\Controllers\Api\IncomeController;
 use App\Http\Controllers\Api\IncomeResourceController;
 use App\Http\Controllers\Api\PayrollController;
+use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\WithdrawalController;
 use Illuminate\Http\Request;
@@ -28,4 +29,5 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('/incomes', IncomeController::class);
     Route::post('/financial_reports', [FinancialReportController::class, 'financialSummary']);
     Route::apiResource('/clients', ClientController::class);
+    Route::apiResource('/projects', ProjectController::class);
 });
