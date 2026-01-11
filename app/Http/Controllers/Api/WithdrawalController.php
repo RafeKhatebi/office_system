@@ -15,8 +15,8 @@ class WithdrawalController extends Controller
     {
         $withdrawals = Withdrawal::with('employee')->paginate(10);
         return response()->json([
-            'message'  => 'Data fetched successfully',
-            'data'     => $withdrawals
+            'message' => 'Data fetched successfully',
+            'data' => $withdrawals
         ]);
     }
 
@@ -26,16 +26,16 @@ class WithdrawalController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'employee_id'     => 'required|exists:employees,id',
-            'amount'          => 'required|numeric|min:1',
+            'employee_id' => 'required|exists:employees,id',
+            'amount' => 'required|numeric|min:1',
             'withdrawal_date' => 'required|date',
-            'payment_type'    => 'required|in:bank,cash',
-            'reason'          => 'nullable|string',
+            'payment_type' => 'required|in:bank,cash',
+            'reason' => 'nullable|string',
         ]);
         $withdrawal = Withdrawal::create($validator);
         return response()->json([
-            'message'  => 'Data saved successfully',
-            'data'     => $withdrawal
+            'message' => 'Data saved successfully',
+            'data' => $withdrawal
         ]);
     }
 
@@ -47,13 +47,13 @@ class WithdrawalController extends Controller
         $withdrawal = Withdrawal::with('employee')->findOrFail($id);
         if (!$withdrawal) {
             return response()->json([
-                'message'  => 'Not found id: '.$id,
-                'data'     => $withdrawal
+                'message' => 'Not found id: ' . $id,
+                'data' => $withdrawal
             ]);
         }
         return response()->json([
             'message' => 'Data fetched successfully',
-            'data'    => $withdrawal
+            'data' => $withdrawal
         ]);
     }
 
@@ -65,22 +65,22 @@ class WithdrawalController extends Controller
         $withdrawal = Withdrawal::findOrFail($id);
         if (!$withdrawal) {
             return response()->json([
-                'message'  => 'Not found id: '.$id,
-                'data'     => $withdrawal
+                'message' => 'Not found id: ' . $id,
+                'data' => $withdrawal
             ], 404);
         }
         $validator = $request->validate([
-            'employee_id'     => 'required|exists:employees,id',
-            'amount'          => 'required|numeric|min:1',
+            'employee_id' => 'required|exists:employees,id',
+            'amount' => 'required|numeric|min:1',
             'withdrawal_date' => 'required|date',
-            'payment_type'    => 'required|in:bank,cash',
-            'reason'          => 'nullable|string',
+            'payment_type' => 'required|in:bank,cash',
+            'reason' => 'nullable|string',
         ]);
 
         $withdrawal->update($validator);
         return response()->json([
-            'message'  => 'Data updated successfully',
-            'data'     => $withdrawal,
+            'message' => 'Data updated successfully',
+            'data' => $withdrawal,
         ]);
     }
 
@@ -92,12 +92,12 @@ class WithdrawalController extends Controller
         $withdrawal = Withdrawal::findOrFail($id);
         if (!$withdrawal) {
             return response()->json([
-                'message'  => 'Not found id: '.$id,
+                'message' => 'Not found id: ' . $id,
             ]);
         }
         $withdrawal->delete();
         return response()->json([
-            'message'  => 'Data deleted successfully'
+            'message' => 'Data deleted successfully'
         ]);
     }
 }

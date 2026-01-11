@@ -20,12 +20,12 @@ class ProjectController extends Controller
         if (isEmpty($projects)) {
             return response()->json([
                 'message' => 'Table is empty',
-                'data'    => $projects
+                'data' => $projects
             ]);
         }
         return response()->json([
             'message' => 'Data fetched successfully',
-            'data'    => $projects
+            'data' => $projects
         ]);
     }
 
@@ -37,7 +37,7 @@ class ProjectController extends Controller
         $project = Project::create($request->validated());
         return response()->json([
             'message' => 'Project created successfully',
-            'data'    => $project
+            'data' => $project
         ]);
     }
 
@@ -49,13 +49,13 @@ class ProjectController extends Controller
         $project = Project::find($id);
         if (!$project) {
             return response()->json([
-                'message' => 'Not found id: '.$id,
-                'data'    => $project
+                'message' => 'Not found id: ' . $id,
+                'data' => $project
             ], 404);
         }
         return response()->json([
             'message' => 'Data fetched successfully',
-            'data'    => $project
+            'data' => $project
         ]);
     }
 
@@ -67,15 +67,15 @@ class ProjectController extends Controller
         $project = Project::find($id);
         if (!$project) {
             return response()->json([
-                'message' => 'Not found id: '.$id,
-                'data'    => $project
+                'message' => 'Not found id: ' . $id,
+                'data' => $project
             ], 404);
         }
 
         $project->update($request->validated());
         return response()->json([
             'message' => 'Project updated successfully',
-            'data'    => $project
+            'data' => $project
         ]);
     }
 
@@ -87,8 +87,8 @@ class ProjectController extends Controller
         $project = Project::find($id);
         if (!$project) {
             return response()->json([
-                'message' => 'Not found id: '.$id,
-                'data'    => $project
+                'message' => 'Not found id: ' . $id,
+                'data' => $project
             ], 404);
         }
         $project->delete();

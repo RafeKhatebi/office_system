@@ -19,9 +19,9 @@ class Expense extends Model
     ];
 
     protected $casts = [
-        'amount'       => 'decimal:2',
+        'amount' => 'decimal:2',
         'expense_date' => 'date:Y-m-d',
-        'start_date'   => 'date:Y-m-d',
-        'end_date'     => 'date:Y-m-d',
+        'start_date' => 'date:Y-m-d',
+        'end_date' => 'date:Y-m-d',
     ];
 }

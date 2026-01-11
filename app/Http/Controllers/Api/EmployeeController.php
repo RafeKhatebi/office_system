@@ -19,8 +19,8 @@ class EmployeeController extends Controller
     {
         $employees = employee::paginate(10);
         return response()->json([
-            'message'  => 'Data fetche successfully',
-            'data'     => $employees,
+            'message' => 'Data fetche successfully',
+            'data' => $employees,
         ]);
     }
 
@@ -30,46 +30,46 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'first_name'   => 'required|string|max:255',
-            'last_name'    => 'required|string|max:255',
-            'job_title'    => 'required|string|max:255',
-            'salary'       => 'nullable|numeric|min:0',
-            'address'      => 'nullable|string',
-            'phone'        => 'required|string|max:15',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'job_title' => 'required|string|max:255',
+            'salary' => 'nullable|numeric|min:0',
+            'address' => 'nullable|string',
+            'phone' => 'required|string|max:15',
             'emergency_phone' => 'nullable|string|max:15',
-            'gender'          => 'nullable|in:male,female',
-            'date_of_birth'   => 'nullable|date|before_or_equal:today',
-            'national_id'     => 'nullable|string|max:255|unique:employees,national_id',
+            'gender' => 'nullable|in:male,female',
+            'date_of_birth' => 'nullable|date|before_or_equal:today',
+            'national_id' => 'nullable|string|max:255|unique:employees,national_id',
             'employment_type' => 'required|in:full_time,part_time,project_base,contract',
-            'status'          => 'nullable|in:active,inactive',
+            'status' => 'nullable|in:active,inactive',
         ]);
 
         // check validation
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'Validation error',
-                'errors'  => $validator->errors(),
+                'errors' => $validator->errors(),
             ], 422);
         }
         // save employee's information
         $employee = employee::create([
-            'first_name'    => $request->first_name,
-            'last_name'     => $request->last_name,
-            'job_title'     => $request->job_title,
-            'salary'        => $request->salary,
-            'address'       => $request->address,
-            'hire_date'     => Carbon::today(),
-            'phone'         => $request->phone,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'job_title' => $request->job_title,
+            'salary' => $request->salary,
+            'address' => $request->address,
+            'hire_date' => Carbon::today(),
+            'phone' => $request->phone,
             'emergency_phone' => $request->emergency_phone,
-            'gender'          => $request->gender,
-            'date_of_birth'   => $request->date_of_birth,
-            'national_id'     => $request->national_id,
+            'gender' => $request->gender,
+            'date_of_birth' => $request->date_of_birth,
+            'national_id' => $request->national_id,
             'employment_type' => $request->employment_type,
-            'status'          => $request->status,
+            'status' => $request->status,
         ]);
         return response()->json([
-            'message'  => 'Date saved successfully',
-            'data'     => $employee
+            'message' => 'Date saved successfully',
+            'data' => $employee
         ]);
     }
 
@@ -81,13 +81,13 @@ class EmployeeController extends Controller
         $employee = employee::find($id);
         if (!$employee) {
             return response()->json([
-                'message'  => 'Data not found to This id: ' .$id,
-                'data'     => $employee
+                'message' => 'Data not found to This id: ' . $id,
+                'data' => $employee
 
             ], 404);
         }
         return response()->json([
-            'message'  => 'Data fetched successfully',
+            'message' => 'Data fetched successfully',
             'employee' => $employee
         ]);
     }
@@ -99,45 +99,45 @@ class EmployeeController extends Controller
     {
         $employee = employee::find($id);
         $validator = Validator::make($request->all(), [
-            'first_name'   => 'required|string|max:255',
-            'last_name'    => 'required|string|max:255',
-            'job_title'    => 'required|string|max:255',
-            'salary'       => 'nullable|numeric|min:0',
-            'address'      => 'nullable|string',
-            'phone'        => 'required|string|max:15',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'job_title' => 'required|string|max:255',
+            'salary' => 'nullable|numeric|min:0',
+            'address' => 'nullable|string',
+            'phone' => 'required|string|max:15',
             'emergency_phone' => 'nullable|string|max:15',
-            'gender'          => 'nullable|in:male,female',
-            'date_of_birth'   => 'nullable|date|before_or_equal:today',
-            'national_id'     => 'nullable|string|max:255|unique:employees,national_id,'.$id,
+            'gender' => 'nullable|in:male,female',
+            'date_of_birth' => 'nullable|date|before_or_equal:today',
+            'national_id' => 'nullable|string|max:255|unique:employees,national_id,' . $id,
             'employment_type' => 'required|in:full_time,part_time,project_base,contract',
-            'status'          => 'nullable|in:active,inactive',
+            'status' => 'nullable|in:active,inactive',
         ]);
 
         if ($validator->fails()) {
             return response()->json([
-                'message'  => 'Validation error',
-                'errors'   => $validator->errors(),
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
             ]);
         }
 
         $employee->update([
-            'first_name'  => $request->first_name,
-            'last_name'   => $request->last_name,
-            'job_title'   => $request->job_title,
-            'salary'      => $request->salary,
-            'address'     => $request->address,
-            'phone'       => $request->phone,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'job_title' => $request->job_title,
+            'salary' => $request->salary,
+            'address' => $request->address,
+            'phone' => $request->phone,
             'emergency_phone' => $request->emergency_phone,
-            'gender'          => $request->gender,
-            'date_of_birth'   => $request->date_of_birth,
-            'national_id'     => $request->national_id,
+            'gender' => $request->gender,
+            'date_of_birth' => $request->date_of_birth,
+            'national_id' => $request->national_id,
             'employment_type' => $request->employment_type,
-            'status'          => $request->status
+            'status' => $request->status
         ]);
 
         return response()->json([
-            'message'  => 'Data updated successfully',
-            'data'     => $employee
+            'message' => 'Data updated successfully',
+            'data' => $employee
         ]);
     }
 
@@ -149,13 +149,13 @@ class EmployeeController extends Controller
         $employee = employee::find($id);
         if (!$employee) {
             return response()->json([
-                'message'  => 'Not found id: '.$id,
+                'message' => 'Not found id: ' . $id,
             ], 404);
         }
 
         $employee->delete();
         return response()->json([
-            'message'  => 'Data deleted successfully',
+            'message' => 'Data deleted successfully',
         ]);
 
     }

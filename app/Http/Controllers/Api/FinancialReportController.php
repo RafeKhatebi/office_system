@@ -23,12 +23,12 @@ class FinancialReportController extends Controller
         if (isEmpty($financials)) {
             return response()->json([
                 'massage' => 'Tabel is empty',
-                'data'    => $financials,
+                'data' => $financials,
             ]);
         }
         return response()->json([
-            'message'  => 'Data fetched successfully',
-            'data'     => $financials
+            'message' => 'Data fetched successfully',
+            'data' => $financials
         ]);
     }
 
@@ -39,30 +39,30 @@ class FinancialReportController extends Controller
     {
         $request->validate([
             'from' => 'required|date',
-            'to'   => 'required|date|after_or_equal:from',
+            'to' => 'required|date|after_or_equal:from',
         ]);
 
         $from_date = Carbon::parse($request->from);
-        $to_date   = Carbon::parse($request->to);
+        $to_date = Carbon::parse($request->to);
 
         $total_income = income::whereBetween('income_date', [$from_date, $to_date])->sum('amount');
         $total_expense = Expense::whereBetween('expense_date', [$from_date, $to_date])->sum('amount');
         $total_withdrawal = Withdrawal::whereBetween('withdrawal_date', [$from_date, $to_date])->sum('amount');
-        $net_result       = $total_income - ($total_expense + $total_withdrawal);
+        $net_result = $total_income - ($total_expense + $total_withdrawal);
 
         $report = FinancialReport::create([
             'report_type' => 'financial_summary',
-            'from'        => $from_date,
-            'to'          => $to_date,
+            'from' => $from_date,
+            'to' => $to_date,
             'total_income' => $total_income,
             'total_expense' => $total_expense,
             'total_withdrawal' => $total_withdrawal,
-            'net_result'       => $net_result
+            'net_result' => $net_result
         ]);
 
         return response()->json([
             'message' => 'Financial created successfully',
-            'data'    => $report
+            'data' => $report
         ]);
     }
 

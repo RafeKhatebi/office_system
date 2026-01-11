@@ -14,7 +14,7 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email'   => 'required|email',
+            'email' => 'required|email',
             'password' => 'required|string',
         ]);
 
@@ -26,10 +26,10 @@ class UserController extends Controller
         $user = User::where('email', $request->email)->firstOrFail();
         $token = $user->createToken('auth_token')->plainTextToken;
         return response()->json([
-            'message'  => 'Logged in successfully',
-            'user'     => $user,
-            'token'    => $token
-        ]); 
-       
+            'message' => 'Logged in successfully',
+            'user' => $user,
+            'token' => $token
+        ]);
+
     }
 }
