@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ClientController;
+use App\Http\Controllers\Api\ContractController;
 use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\ExpenseController;
 use App\Http\Controllers\Api\FinancialReportController;
@@ -30,4 +31,5 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('/financial_reports', [FinancialReportController::class, 'financialSummary']);
     Route::apiResource('/clients', ClientController::class);
     Route::apiResource('/projects', ProjectController::class);
+    Route::apiResource('/contracts', ContractController::class);
 });
