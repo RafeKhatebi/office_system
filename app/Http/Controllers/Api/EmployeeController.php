@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EmployeeRequest;
 use App\Models\employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -27,49 +28,49 @@ class EmployeeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(EmployeeRequest $request)
     {
         $validator = Validator::make($request->all(), [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'job_title' => 'required|string|max:255',
-            'salary' => 'nullable|numeric|min:0',
-            'address' => 'nullable|string',
-            'phone' => 'required|string|max:15',
+            'first_name'   => 'required|string|max:255',
+            'last_name'    => 'required|string|max:255',
+            'job_title'    => 'required|string|max:255',
+            'salary'       => 'nullable|numeric|min:0',
+            'address'      => 'nullable|string',
+            'phone'        => 'required|string|max:15',
             'emergency_phone' => 'nullable|string|max:15',
-            'gender' => 'nullable|in:male,female',
-            'date_of_birth' => 'nullable|date|before_or_equal:today',
-            'national_id' => 'nullable|string|max:255|unique:employees,national_id',
+            'gender'          => 'nullable|in:male,female',
+            'date_of_birth'   => 'nullable|date|before_or_equal:today',
+            'national_id'     => 'nullable|string|max:255|unique:employees,national_id',
             'employment_type' => 'required|in:full_time,part_time,project_base,contract',
-            'status' => 'nullable|in:active,inactive',
+            'status'          => 'nullable|in:active,inactive',
         ]);
 
         // check validation
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'Validation error',
-                'errors' => $validator->errors(),
+                'errors'  => $validator->errors(),
             ], 422);
         }
         // save employee's information
         $employee = employee::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'job_title' => $request->job_title,
-            'salary' => $request->salary,
-            'address' => $request->address,
-            'hire_date' => Carbon::today(),
-            'phone' => $request->phone,
+            'first_name'    => $request->first_name,
+            'last_name'     => $request->last_name,
+            'job_title'     => $request->job_title,
+            'salary'        => $request->salary,
+            'address'       => $request->address,
+            'hire_date'     => Carbon::today(),
+            'phone'         => $request->phone,
             'emergency_phone' => $request->emergency_phone,
-            'gender' => $request->gender,
-            'date_of_birth' => $request->date_of_birth,
-            'national_id' => $request->national_id,
+            'gender'          => $request->gender,
+            'date_of_birth'   => $request->date_of_birth,
+            'national_id'     => $request->national_id,
             'employment_type' => $request->employment_type,
-            'status' => $request->status,
+            'status'          => $request->status,
         ]);
         return response()->json([
-            'message' => 'Date saved successfully',
-            'data' => $employee
+            'message'  => 'Date saved successfully',
+            'data'     => $employee
         ]);
     }
 
@@ -95,44 +96,44 @@ class EmployeeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(EmployeeRequest $request, string $id)
     {
         $employee = employee::find($id);
         $validator = Validator::make($request->all(), [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'job_title' => 'required|string|max:255',
-            'salary' => 'nullable|numeric|min:0',
-            'address' => 'nullable|string',
-            'phone' => 'required|string|max:15',
+            'first_name'   => 'required|string|max:255',
+            'last_name'    => 'required|string|max:255',
+            'job_title'    => 'required|string|max:255',
+            'salary'       => 'nullable|numeric|min:0',
+            'address'      => 'nullable|string',
+            'phone'        => 'required|string|max:15',
             'emergency_phone' => 'nullable|string|max:15',
-            'gender' => 'nullable|in:male,female',
-            'date_of_birth' => 'nullable|date|before_or_equal:today',
-            'national_id' => 'nullable|string|max:255|unique:employees,national_id,' . $id,
+            'gender'          => 'nullable|in:male,female',
+            'date_of_birth'   => 'nullable|date|before_or_equal:today',
+            'national_id'     => 'nullable|string|max:255|unique:employees,national_id,'.$id,
             'employment_type' => 'required|in:full_time,part_time,project_base,contract',
-            'status' => 'nullable|in:active,inactive',
+            'status'          => 'nullable|in:active,inactive',
         ]);
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Validation error',
-                'errors' => $validator->errors(),
+                'message'  => 'Validation error',
+                'errors'   => $validator->errors(),
             ]);
         }
 
         $employee->update([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'job_title' => $request->job_title,
-            'salary' => $request->salary,
-            'address' => $request->address,
-            'phone' => $request->phone,
+            'first_name'  => $request->first_name,
+            'last_name'   => $request->last_name,
+            'job_title'   => $request->job_title,
+            'salary'      => $request->salary,
+            'address'     => $request->address,
+            'phone'       => $request->phone,
             'emergency_phone' => $request->emergency_phone,
-            'gender' => $request->gender,
-            'date_of_birth' => $request->date_of_birth,
-            'national_id' => $request->national_id,
+            'gender'          => $request->gender,
+            'date_of_birth'   => $request->date_of_birth,
+            'national_id'     => $request->national_id,
             'employment_type' => $request->employment_type,
-            'status' => $request->status
+            'status'          => $request->status
         ]);
 
         return response()->json([
