@@ -21,17 +21,25 @@ class ContractRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'project_id'      => 'required|exists:projects,id',
-            'contract_number' => 'required|string',
-            'amount'          => 'required|numeric|min:1',
-            'currency'        => 'required|in:AF,USD',
-            'payment_type'    => 'required|in:full,installment',
-            'signed_date'     => 'signed_date|date',
-            'status'          => 'required|in:active,expired,terminated',
-            'contract_file'   => 'nullable|string',
-            'notes'           => 'nullable|string',
-            ''
+        $rules = [
+            'project_id'    => 'required|exists:projects,id',
+            'amount'        => 'required|numeric|min:1',
+            'currency'      => 'required|in:AFN,USD',
+            'payment_type'  => 'required|in:full,installment',
+            'signed_date'   => 'required|date',
+            'status'        => 'required|in:active,expired,terminated',
+            'contract_file' => 'nullable|file|mimes:pdf,doc,docx',
+            'notes'         => 'nullable|string|max:1000',
         ];
+
+        // اگر update بود (PUT / PATCH)
+        if ($this->isMethod('put') || $this->isMethod('patch')) {
+            foreach ($rules as $key => $rule) {
+                $rules[$key] = str_replace('required', 'sometimes', $rule);
+            }
+        }
+
+        return $rules;
     }
+
 }
