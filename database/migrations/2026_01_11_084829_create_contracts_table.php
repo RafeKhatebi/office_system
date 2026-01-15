@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('project_id')->constrained()->cascadeOnDelete();
-            $table->string('contract_number');
+            $table->string('contract_number')->unique();
             $table->decimal('amount', 10,2);
-            $table->enum('currency', ['AF', 'USD']);
+            $table->enum('currency', ['AFN', 'USD']);
             $table->enum('payment_type', ['full', 'installment']);
             $table->date('signed_date');
             $table->enum('status', ['active', 'expired', 'terminated'])->default('active');
