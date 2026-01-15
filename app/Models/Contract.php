@@ -27,4 +27,9 @@ class Contract extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    public function installments()
+    {
+        return $this->hasMany(ContractInstallment::class);
+    }
 }
